@@ -1,5 +1,6 @@
 // views/chat_screen.dart
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hostelchat/chatctrl.dart';
 
@@ -14,12 +15,18 @@ class ChatPage extends StatefulWidget {
 
 class ChatPageState extends State<ChatPage> {
   final TextEditingController _messageController = TextEditingController();
-
+  String? email = FirebaseAuth.instance.currentUser!.email;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Group Chat'),
+        backgroundColor: const Color.fromARGB(36, 105, 240, 175),
+        title: const Text(
+          'Group Chat',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       body: Column(
         children: [
@@ -37,8 +44,8 @@ class ChatPageState extends State<ChatPage> {
                   itemBuilder: (context, index) {
                     final message = snapshot.data.docs[index];
                     return ListTile(
-                      title: Text(message['text']),
-                      subtitle: Text(message['senderId']),
+                      title: Text(email!, style: const TextStyle(color: Colors.grey, fontSize: 12),) ,
+                      subtitle: Text(message['text'], style: const TextStyle(color: Colors.black, fontSize: 14),),
                     );
                   },
                 );
@@ -61,7 +68,8 @@ class ChatPageState extends State<ChatPage> {
                   icon: const Icon(Icons.send),
                   onPressed: () {
                     if (_messageController.text.isNotEmpty) {
-                      widget.chatController.sendMessage(_messageController.text);
+                      widget.chatController
+                          .sendMessage(_messageController.text);
                       _messageController.clear();
                     }
                   },

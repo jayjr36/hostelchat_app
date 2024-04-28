@@ -56,44 +56,61 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        toolbarHeight: h * 0.2,
+        title: Center(
+            child: Image(
+                height: h * 0.15,
+                width: h * 0.15,
+                image: const AssetImage('assets/logo.png'))),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(
-              controller: _emailController,
-              decoration: const InputDecoration(
-                labelText: 'Email',
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: w * 0.1, vertical: h * 0.1),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'Login',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
-            ),
-            const SizedBox(height: 8.0),
-            TextField(
-              controller: _passwordController,
-              decoration: const InputDecoration(
-                labelText: 'Password',
+              TextField(
+                controller: _emailController,
+                decoration: const InputDecoration(
+                  labelText: 'Email',
+                ),
               ),
-              obscureText: true,
-            ),
-            const SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: _signInWithEmailAndPassword,
-              child: const Text('Login'),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Registration()),
-                );
-              },
-              child: const Text('Create an account'),
-            ),
-          ],
+              const SizedBox(height: 8.0),
+              TextField(
+                controller: _passwordController,
+                decoration: const InputDecoration(
+                  labelText: 'Password',
+                ),
+                obscureText: true,
+              ),
+              const SizedBox(height: 16.0),
+              ElevatedButton(
+                onPressed: _signInWithEmailAndPassword,
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(36, 105, 240, 175),
+                    padding: EdgeInsets.symmetric(horizontal: w * 0.15)),
+                child: const Text('Login'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const Registration()),
+                  );
+                },
+                child: const Text('Create an account'),
+              ),
+            ],
+          ),
         ),
       ),
     );

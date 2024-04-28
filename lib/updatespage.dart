@@ -17,6 +17,7 @@ class UpdatesPageState extends State<UpdatesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color.fromARGB(36, 105, 240, 175),
         title: const Text('Updates'),
       ),
       body: StreamBuilder(
@@ -31,9 +32,15 @@ class UpdatesPageState extends State<UpdatesPage> {
           List<Widget> updateWidgets = [];
           for (var update in updates!) {
             var updateData = update.data();
-            var updateWidget = ListTile(
-              title: Text(updateData['title']),
-              subtitle: Text(updateData['content']),
+            var updateWidget = Container(
+              decoration: BoxDecoration(
+                  border: Border.all(
+                      color: const Color.fromARGB(36, 105, 240, 175),
+                      width: 2)),
+              child: ListTile(
+                title: Text(updateData['title']),
+                subtitle: Text(updateData['content']),
+              ),
             );
             updateWidgets.add(updateWidget);
           }

@@ -13,7 +13,6 @@ class Registration extends StatefulWidget {
 }
 
 class _RegistrationState extends State<Registration> {
- 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final TextEditingController _emailController = TextEditingController();
@@ -21,7 +20,8 @@ class _RegistrationState extends State<Registration> {
 
   void _registerWithEmailAndPassword() async {
     try {
-      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
         email: _emailController.text,
         password: _passwordController.text,
       );
@@ -30,10 +30,10 @@ class _RegistrationState extends State<Registration> {
         await _firestore.collection('users').doc(user.uid).set({
           'email': user.email,
         });
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const Home()),
-        );
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: ((context) => const Home())),
+            (route) => false);
       }
     } catch (e) {
       print(e.toString());
@@ -59,35 +59,51 @@ class _RegistrationState extends State<Registration> {
 
   @override
   Widget build(BuildContext context) {
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Register'),
+        toolbarHeight: h * 0.2,
+        title: Center(
+            child: Image(
+                height: h * 0.15,
+                width: h * 0.15,
+                image: const AssetImage('assets/logo.png'))),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(
-              controller: _emailController,
-              decoration: const InputDecoration(
-                labelText: 'Email',
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: w * 0.1, vertical: h * 0.1),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'Register',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
-            ),
-            const SizedBox(height: 8.0),
-            TextField(
-              controller: _passwordController,
-              decoration: const InputDecoration(
-                labelText: 'Password',
+              TextField(
+                controller: _emailController,
+                decoration: const InputDecoration(
+                  labelText: 'Email',
+                ),
               ),
-              obscureText: true,
-            ),
-            const SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: _registerWithEmailAndPassword,
-              child: const Text('Register'),
-            ),
-          ],
+              const SizedBox(height: 8.0),
+              TextField(
+                controller: _passwordController,
+                decoration: const InputDecoration(
+                  labelText: 'Password',
+                ),
+                obscureText: true,
+              ),
+              const SizedBox(height: 16.0),
+              ElevatedButton(
+                onPressed: _registerWithEmailAndPassword,
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(36, 105, 240, 175),
+                    padding: EdgeInsets.symmetric(horizontal: w * 0.15)),
+                child: const Text('Register'),
+              ),
+            ],
+          ),
         ),
       ),
     );

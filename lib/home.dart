@@ -21,8 +21,12 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color.fromARGB(36, 105, 240, 175),
+        leading: null,
         title: const Text('Home'),
         actions: [
           IconButton(
@@ -39,33 +43,40 @@ class _HomeState extends State<Home> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          const Center(
-            child: Text('Welcome to the Hostel Chat App'),
-          ),
-          Center(
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: ((context) =>
-                        ChatPage(chatController: ChatController()))));
-              },
-              child: const Text('CHAT'),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: w * 0.1, vertical: h * 0.2),
+        child: Column(
+          children: [
+            const Center(
+              child: Text('Get connected with your fellow hostel members'),
             ),
-          ),
-          Center(
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: ((context) =>
-                        const UpdatesPage())));
-          
-              },
-              child: const Text('UPDATES'),
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: ((context) =>
+                          ChatPage(chatController: ChatController()))));
+                },
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(36, 105, 240, 175),
+                    padding: EdgeInsets.symmetric(horizontal: w * 0.24)),
+                child: const Text('CHAT'),
+              ),
             ),
-          )
-        ],
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: ((context) => const UpdatesPage())));
+                },
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(36, 105, 240, 175),
+                    padding: EdgeInsets.symmetric(horizontal: w * 0.21)),
+                child: const Text('UPDATES'),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
