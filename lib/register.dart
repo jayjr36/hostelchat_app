@@ -72,10 +72,14 @@ class _RegistrationState extends State<Registration> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: w * 0.1, vertical: h * 0.1),
+          padding: EdgeInsets.symmetric(horizontal: w * 0.1, vertical: h * 0.06),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+               const Center(
+                child: Text('HOSTEL MANAGEMENT SYSTEM',
+                style: TextStyle(fontSize: 20,
+                color: Color.fromARGB(255, 99, 238, 162)),),),
               const Text(
                 'Register',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),

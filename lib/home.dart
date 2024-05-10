@@ -44,11 +44,22 @@ class _HomeState extends State<Home> {
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: w * 0.1, vertical: h * 0.2),
+        padding: EdgeInsets.symmetric(horizontal: w * 0.1, vertical: h * 0.04),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            const Text(
+              'Welcome to our Hostel \n    Management App',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(
+              height: h * 0.1,
+            ),
             const Center(
-              child: Text('Get connected with your fellow hostel members'),
+              child: Text(
+                'Here, you can connect with fellow hostel \n     members, share updates, and stay \n        updated with all the happenings \n                   within our community. \nWhether you\'re looking for a friendly chat \n    or need to be informed about important \n         announcements, you\'re in the right \n                                  place.',
+                style: TextStyle(fontSize: 16),
+              ),
             ),
             Center(
               child: ElevatedButton(
