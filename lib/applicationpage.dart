@@ -54,6 +54,7 @@ class HostelFormState extends State<HostelForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const  Color.fromARGB(236, 232, 190, 4),
         title: const Text('Hostel Application Form'),
       ),
       body: Padding(
@@ -129,6 +130,9 @@ class HostelFormState extends State<HostelForm> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _confirmBooking,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const  Color.fromARGB(236, 232, 190, 4),
+                ),
                 child: const Text('Confirm Booking'),
               ),
             ],

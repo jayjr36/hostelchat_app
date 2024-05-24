@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hostelchat/applicationpage.dart';
 import 'package:hostelchat/chatctrl.dart';
 import 'package:hostelchat/chatpage.dart';
 import 'package:hostelchat/main.dart';
@@ -25,7 +26,7 @@ class _HomeState extends State<Home> {
     double h = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(36, 105, 240, 175),
+        backgroundColor:const Color.fromARGB(236, 232, 190, 4),
         leading: null,
         title: const Text('Home'),
         actions: [
@@ -69,9 +70,9 @@ class _HomeState extends State<Home> {
                           ChatPage(chatController: ChatController()))));
                 },
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(36, 105, 240, 175),
+                    backgroundColor: const  Color.fromARGB(236, 232, 190, 4),
                     padding: EdgeInsets.symmetric(horizontal: w * 0.24)),
-                child: const Text('CHAT'),
+                child: const Text('CHAT', style: TextStyle(color: Colors.white),),
               ),
             ),
             Center(
@@ -81,9 +82,21 @@ class _HomeState extends State<Home> {
                       builder: ((context) => const UpdatesPage())));
                 },
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(36, 105, 240, 175),
+                    backgroundColor: const  Color.fromARGB(236, 232, 190, 4),
                     padding: EdgeInsets.symmetric(horizontal: w * 0.21)),
-                child: const Text('UPDATES'),
+                child: const Text('UPDATES', style: TextStyle(color: Colors.white),),
+              ),
+            ),
+             Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: ((context) => const HostelForm())));
+                },
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: const  Color.fromARGB(236, 232, 190, 4),
+                    padding: EdgeInsets.symmetric(horizontal: w * 0.17)),
+                child: const Text('BOOK A ROOM', style: TextStyle(color: Colors.white),),
               ),
             )
           ],

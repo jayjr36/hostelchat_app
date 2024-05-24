@@ -20,7 +20,7 @@ class ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(36, 105, 240, 175),
+        backgroundColor: const  Color.fromARGB(236, 232, 190, 4),
         title: const Text(
           'Group Chat',
           style: TextStyle(
@@ -44,7 +44,7 @@ class ChatPageState extends State<ChatPage> {
                   itemBuilder: (context, index) {
                     final message = snapshot.data.docs[index];
                     return ListTile(
-                      title: Text(email!, style: const TextStyle(color: Colors.grey, fontSize: 12),) ,
+                      title: Text(message['senderId'], style: const TextStyle(color: Colors.grey, fontSize: 12),) ,
                       subtitle: Text(message['text'], style: const TextStyle(color: Colors.black, fontSize: 14),),
                     );
                   },

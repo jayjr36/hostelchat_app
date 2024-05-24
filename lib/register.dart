@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hostelchat/home.dart';
+import 'package:loading_overlay/loading_overlay.dart';
 
 class Registration extends StatefulWidget {
   const Registration({super.key});
@@ -20,6 +21,9 @@ class _RegistrationState extends State<Registration> {
 
   void _registerWithEmailAndPassword() async {
     try {
+      setState(() {
+        isloading = true;
+      });
       UserCredential userCredential =
           await _auth.createUserWithEmailAndPassword(
         email: _emailController.text,
@@ -34,8 +38,14 @@ class _RegistrationState extends State<Registration> {
             context,
             MaterialPageRoute(builder: ((context) => const Home())),
             (route) => false);
+        setState(() {
+          isloading = false;
+        });
       }
     } catch (e) {
+      setState(() {
+        isloading = false;
+      });
       print(e.toString());
       showDialog(
         context: context,
@@ -57,6 +67,7 @@ class _RegistrationState extends State<Registration> {
     }
   }
 
+  bool isloading = false;
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
@@ -70,43 +81,75 @@ class _RegistrationState extends State<Registration> {
                 width: h * 0.15,
                 image: const AssetImage('assets/logo.png'))),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: w * 0.1, vertical: h * 0.06),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-               const Center(
-                child: Text('HOSTEL MANAGEMENT SYSTEM',
-                style: TextStyle(fontSize: 20,
-                color: Color.fromARGB(255, 99, 238, 162)),),),
-              const Text(
-                'Register',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+      body: LoadingOverlay(
+        isLoading: isloading,
+        progressIndicator: const CircularProgressIndicator(
+          color: Colors.yellowAccent,
+        ),
+        child: SingleChildScrollView(
+          child: Container(
+            width: w,
+            height: h * 0.9,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Color.fromARGB(255, 28, 31, 188),
+                  Color.fromARGB(255, 161, 175, 15)
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
               ),
-              TextField(
-                controller: _emailController,
-                decoration: const InputDecoration(
-                  labelText: 'Email',
-                ),
+            ),
+            child: Padding(
+              padding:
+                  EdgeInsets.symmetric(horizontal: w * 0.1, vertical: h * 0.06),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const Center(
+                    child: Text(
+                      'HOSTEL MANAGEMENT SYSTEM',
+                      style: TextStyle(fontSize: 20, color: Colors.white),
+                    ),
+                  ),
+                  const Text(
+                    'Register',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontSize: 18),
+                  ),
+                  TextField(
+                    controller: _emailController,
+                    decoration: const InputDecoration(
+                        labelText: 'Email',
+                        labelStyle: TextStyle(color: Colors.white)),
+                  ),
+                  const SizedBox(height: 8.0),
+                  TextField(
+                    controller: _passwordController,
+                    decoration: const InputDecoration(
+                      labelStyle: TextStyle(color: Colors.white),
+                      labelText: 'Password',
+                    ),
+                    obscureText: true,
+                  ),
+                  const SizedBox(height: 16.0),
+                  ElevatedButton(
+                    onPressed: _registerWithEmailAndPassword,
+                    style: ElevatedButton.styleFrom(
+                        elevation: 5,
+                        surfaceTintColor: Colors.yellowAccent,
+                        backgroundColor: const Color.fromARGB(34, 201, 244, 59),
+                        padding: EdgeInsets.symmetric(horizontal: w * 0.15)),
+                    child: const Text(
+                      'Register',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(height: 8.0),
-              TextField(
-                controller: _passwordController,
-                decoration: const InputDecoration(
-                  labelText: 'Password',
-                ),
-                obscureText: true,
-              ),
-              const SizedBox(height: 16.0),
-              ElevatedButton(
-                onPressed: _registerWithEmailAndPassword,
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(36, 105, 240, 175),
-                    padding: EdgeInsets.symmetric(horizontal: w * 0.15)),
-                child: const Text('Register'),
-              ),
-            ],
+            ),
           ),
         ),
       ),

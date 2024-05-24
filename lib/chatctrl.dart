@@ -11,7 +11,7 @@ class ChatController {
   Future<void> sendMessage(String text) async {
     final currentUser = _auth.currentUser;
     if (currentUser != null) {
-      final message = Message(senderId: currentUser.uid, text: text);
+      final message = Message(senderId: currentUser.email.toString(), text: text);
       await _firestore.collection('messages').add({
         'senderId': message.senderId,
         'text': message.text,
