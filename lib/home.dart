@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hostelchat/applicationpage.dart';
 import 'package:hostelchat/chatctrl.dart';
 import 'package:hostelchat/chatpage.dart';
+import 'package:hostelchat/hostelprofile.dart';
 import 'package:hostelchat/main.dart';
 import 'package:hostelchat/updatespage.dart';
 
@@ -98,7 +99,20 @@ class _HomeState extends State<Home> {
                     padding: EdgeInsets.symmetric(horizontal: w * 0.17)),
                 child: const Text('BOOK A ROOM', style: TextStyle(color: Colors.white),),
               ),
+            ),
+                         Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: ((context) => HostelPage())));
+                },
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: const  Color.fromARGB(236, 232, 190, 4),
+                    padding: EdgeInsets.symmetric(horizontal: w * 0.17)),
+                child: const Text('OUR HOSTELS', style: TextStyle(color: Colors.white),),
+              ),
             )
+
           ],
         ),
       ),
