@@ -55,11 +55,13 @@ class BookingsPageState extends State<BookingsPage> {
           actions: [
             TextButton(
               child: const Text('Cancel'),
+              style: TextButton.styleFrom(backgroundColor: Colors.red),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
               child: const Text('Submit'),
               onPressed: () {
                 // Update payment status in Firestore
@@ -89,7 +91,8 @@ class BookingsPageState extends State<BookingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Your Bookings'),
+        backgroundColor: const Color.fromARGB(236, 232, 190, 4),
+        title: const Text('My Bookings'),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: _firestore.collection('bookings').snapshots(),
@@ -108,19 +111,21 @@ class BookingsPageState extends State<BookingsPage> {
               return Card(
                 margin: const EdgeInsets.all(10.0),
                 child: ListTile(
-                  title: Text('Hostel: ${booking['hostel_name']}'),
+                // title: Text('Hostel: ${booking['hostel_name']}'),
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Text('Hostel: ${booking['hostelName']}'),
                       Text('Duration: ${booking['duration']}'),
                       Text('Price: ${booking['price']}'),
-                      Text('Room Number: ${booking['room_number']}'),
+                      Text('Room Number: ${booking['roomNumber']}'),
                       Text('Payment Status: ${booking['payment_status']}'),
                     ],
                   ),
                   trailing: booking['payment_status'] != 'paid'
                       ? ElevatedButton(
-                          child: const Text('Make Payment'),
+                          child: const Text('Make Payment', style: TextStyle(color: Colors.white),),
+                          style: ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(236, 232, 190, 4),),
                           onPressed: () => _makePayment(booking.id),
                         )
                       : null,

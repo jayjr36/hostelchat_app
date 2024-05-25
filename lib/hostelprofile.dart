@@ -36,13 +36,13 @@ class HostelPage extends StatelessWidget {
       name: 'BLOCK IV Hostel',
       imageAsset: 'assets/block4.jpg',
       description:
-          'Magufuli Hostel provides affordable accommodation options with basic amenities and convenient access to campus facilities.',
+          'BLOCK IV Female Hostel provides affordable accommodation options with basic amenities and convenient access to campus facilities.',
     ),
     Hostel(
       name: 'BLOCK V Hostel',
       imageAsset: 'assets/block5.jpg',
       description:
-          'Sisulu Hostel offers a serene environment conducive to study and relaxation, with well-maintained facilities and green spaces.',
+          'Block V male Hostel offers a serene environment conducive to study and relaxation, with well-maintained facilities and green spaces.',
     ),
   ];
 
@@ -52,8 +52,8 @@ class HostelPage extends StatelessWidget {
     double w = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 3, 37, 65),
-        title: const Text('DIT Hostels',style: TextStyle(fontSize: 16),),
+        backgroundColor: const Color.fromARGB(236, 232, 190, 4),
+        title: const Text('DIT Hostels', style: TextStyle(color: Colors.white,fontSize: 16)),
       ),
       body: ListView.builder(
         itemCount: hostels.length,
@@ -62,10 +62,10 @@ class HostelPage extends StatelessWidget {
           return ListTile(
             splashColor: Colors.yellowAccent,
             leading: CircleAvatar(
-              radius: h*0.3,
+              radius: h * 0.03, // Adjusted the radius to be more appropriate
               backgroundImage: AssetImage(hostel.imageAsset),
             ),
-            title: Text(hostel.name),
+            title: Text(hostel.name, style: const TextStyle(color: Colors.yellow,fontWeight: FontWeight.bold),),
             subtitle: Text(hostel.description),
           );
         },
@@ -73,3 +73,4 @@ class HostelPage extends StatelessWidget {
     );
   }
 }
+

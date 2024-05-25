@@ -17,7 +17,7 @@ class UpdatesPageState extends State<UpdatesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(36, 105, 240, 175),
+        backgroundColor: const Color.fromARGB(236, 232, 190, 4),
         title: const Text('Updates'),
       ),
       body: StreamBuilder(
